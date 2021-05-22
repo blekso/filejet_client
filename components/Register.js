@@ -5,7 +5,6 @@ import { AuthContext } from "../pages/_app.js";
 export default function Register() {
   const { dispatch } = React.useContext(AuthContext);
   const initialState = {
-    name: "",
     email: "",
     password: "",
     isSubmitting: false,
@@ -30,35 +29,6 @@ export default function Register() {
 
     axios
       .post("http://localhost:5000/api/auth", {
-        email: data.email,
-        password: data.password,
-      })
-      .then((res) => {
-        dispatch({
-          type: "LOGIN",
-          payload: res,
-        });
-      })
-      .catch((error) => {
-        setData({
-          ...data,
-          isSubmitting: false,
-          errorMessage: error.message || error.statusText,
-        });
-      });
-  };
-
-  const handleRegisterSubmit = (event) => {
-    event.preventDefault();
-    setData({
-      ...data,
-      isSubmitting: true,
-      errorMessage: null,
-    });
-
-    axios
-      .post("http://localhost:5000/api/users", {
-        name: data.name,
         email: data.email,
         password: data.password,
       })
