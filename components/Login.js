@@ -1,31 +1,54 @@
-import { useState } from "react";
-import { useRouter } from "next/router";
+import React from "react";
 import axios from "axios";
+import { AuthContext } from "../pages/_app.js";
 
 export default function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const router = useRouter();
+  const { dispatch } = React.useContext(AuthContext);
+  const initialState = {
+    email: "",
+    password: "",
+    isSubmitting: false,
+    errorMessage: null,
+  };
+  const [data, setData] = React.useState(initialState);
 
-  const login = () => {
-    const user = {
-      email: email,
-      password: password,
-    };
-
-    axios
-      .post("http://localhost:5000/api/auth", user)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+  const handleInputChange = (event) => {
+    setData({
+      ...data,
+      [event.target.name]: event.target.value,
+    });
   };
 
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+    setData({
+      ...data,
+      isSubmitting: true,
+      errorMessage: null,
+    });
+
+    axios
+      .post("http://localhost:5000/api/auth", {
+        email: data.email,
+        password: data.password,
+      })
+      .then((res) => {
+        dispatch({
+          type: "LOGIN",
+          payload: res,
+        });
+      })
+      .catch((error) => {
+        setData({
+          ...data,
+          isSubmitting: false,
+          errorMessage: error.message || error.statusText,
+        });
+      });
+  };
   return (
     <div className="w-full h-full flex justify-center items-center">
-      <form className="w-full max-w-lg">
+      <form className="w-full max-w-lg" onSubmit={handleFormSubmit}>
         <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full">
             <label
@@ -37,10 +60,11 @@ export default function Login() {
             <input
               className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               id="grid-email"
+              name="email"
               type="email"
               placeholder="email@email.com"
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
+              value={data.email}
+              onChange={handleInputChange}
             />
           </div>
         </div>
@@ -55,20 +79,23 @@ export default function Login() {
             <input
               className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               id="grid-password"
+              name="password"
               type="password"
               placeholder="******************"
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
+              value={data.password}
+              onChange={handleInputChange}
             />
           </div>
         </div>
+        {data.errorMessage && (
+          <span className="form-error">{data.errorMessage}</span>
+        )}
         <div className="flex flex-wrap -mx-3 mb-6">
           <button
+            disabled={data.isSubmitting}
             className="bg-blue-600 hover:bg-blue-700 duration-300 text-white shadow p-2 rounded-r"
-            type="button"
-            onClick={login}
           >
-            Login
+            {data.isSubmitting ? "Loading..." : "Login"}
           </button>
         </div>
       </form>

@@ -1,33 +1,84 @@
-import { useState } from "react";
-import { useRouter } from "next/router";
+import React from "react";
 import axios from "axios";
+import { AuthContext } from "../pages/_app.js";
 
 export default function Register() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const router = useRouter();
+  const { dispatch } = React.useContext(AuthContext);
+  const initialState = {
+    name: "",
+    email: "",
+    password: "",
+    isSubmitting: false,
+    errorMessage: null,
+  };
+  const [data, setData] = React.useState(initialState);
 
-  const register = async () => {
-    const user = {
-      name: name,
-      email: email,
-      password: password,
-    };
+  const handleInputChange = (event) => {
+    setData({
+      ...data,
+      [event.target.name]: event.target.value,
+    });
+  };
 
-    await axios
-      .post("http://localhost:5000/api/users", user)
-      .then((res) => {
-        console.log(res);
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+    setData({
+      ...data,
+      isSubmitting: true,
+      errorMessage: null,
+    });
+
+    axios
+      .post("http://localhost:5000/api/auth", {
+        email: data.email,
+        password: data.password,
       })
-      .catch((err) => {
-        console.error(err);
+      .then((res) => {
+        dispatch({
+          type: "LOGIN",
+          payload: res,
+        });
+      })
+      .catch((error) => {
+        setData({
+          ...data,
+          isSubmitting: false,
+          errorMessage: error.message || error.statusText,
+        });
       });
   };
 
+  const handleRegisterSubmit = (event) => {
+    event.preventDefault();
+    setData({
+      ...data,
+      isSubmitting: true,
+      errorMessage: null,
+    });
+
+    axios
+      .post("http://localhost:5000/api/users", {
+        name: data.name,
+        email: data.email,
+        password: data.password,
+      })
+      .then((res) => {
+        dispatch({
+          type: "LOGIN",
+          payload: res,
+        });
+      })
+      .catch((error) => {
+        setData({
+          ...data,
+          isSubmitting: false,
+          errorMessage: error.message || error.statusText,
+        });
+      });
+  };
   return (
     <div className="w-full h-full flex justify-center items-center">
-      <form className="w-full max-w-lg">
+      <form className="w-full max-w-lg" onSubmit={handleFormSubmit}>
         <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full md:w-1/2 mb-6 md:mb-0">
             <label
@@ -39,10 +90,11 @@ export default function Register() {
             <input
               className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
               id="grid-first-name"
+              name="name"
               type="text"
               placeholder="Jane"
-              onChange={(e) => setName(e.target.value)}
-              value={name}
+              value={data.name}
+              onChange={handleInputChange}
             />
           </div>
         </div>
@@ -57,10 +109,11 @@ export default function Register() {
             <input
               className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               id="grid-email"
+              name="email"
               type="email"
               placeholder="email@email.com"
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
+              value={data.email}
+              onChange={handleInputChange}
             />
           </div>
         </div>
@@ -75,20 +128,23 @@ export default function Register() {
             <input
               className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               id="grid-password"
+              name="password"
               type="password"
               placeholder="******************"
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
+              value={data.password}
+              onChange={handleInputChange}
             />
           </div>
         </div>
+        {data.errorMessage && (
+          <span className="form-error">{data.errorMessage}</span>
+        )}
         <div className="flex flex-wrap -mx-3 mb-6">
           <button
+            disabled={data.isSubmitting}
             className="bg-blue-600 hover:bg-blue-700 duration-300 text-white shadow p-2 rounded-r"
-            type="button"
-            onClick={register}
           >
-            Sign Up
+            {data.isSubmitting ? "Loading..." : "Sign up"}
           </button>
         </div>
       </form>
