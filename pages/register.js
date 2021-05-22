@@ -15,16 +15,21 @@ export default function Register() {
       password: password,
     };
 
-    await axios.post("http://localhost:5000/api/users", user).then((res) => {
-      console.log(res);
-    });
+    await axios
+      .post("http://localhost:5000/api/users", user)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
 
   return (
     <div className="w-full h-full flex justify-center items-center">
       <form className="w-full max-w-lg">
         <div className="flex flex-wrap -mx-3 mb-6">
-          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+          <div className="w-full md:w-1/2 mb-6 md:mb-0">
             <label
               className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
               htmlFor="grid-first-name"
@@ -32,7 +37,7 @@ export default function Register() {
               Name
             </label>
             <input
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
               id="grid-first-name"
               type="text"
               placeholder="Jane"
@@ -42,7 +47,7 @@ export default function Register() {
           </div>
         </div>
         <div className="flex flex-wrap -mx-3 mb-6">
-          <div className="w-full px-3">
+          <div className="w-full">
             <label
               className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
               htmlFor="grid-email"
@@ -60,7 +65,7 @@ export default function Register() {
           </div>
         </div>
         <div className="flex flex-wrap -mx-3 mb-6">
-          <div className="w-full px-3">
+          <div className="w-full">
             <label
               className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
               htmlFor="grid-password"

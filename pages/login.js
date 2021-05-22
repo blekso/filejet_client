@@ -13,16 +13,21 @@ export default function Login() {
       password: password,
     };
 
-    axios.post("http://localhost:5000/api/auth", user).then((res) => {
-      console.log(res);
-    });
+    axios
+      .post("http://localhost:5000/api/auth", user)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
 
   return (
     <div className="w-full h-full flex justify-center items-center">
       <form className="w-full max-w-lg">
         <div className="flex flex-wrap -mx-3 mb-6">
-          <div className="w-full px-3">
+          <div className="w-full">
             <label
               className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
               htmlFor="grid-email"
@@ -40,7 +45,7 @@ export default function Login() {
           </div>
         </div>
         <div className="flex flex-wrap -mx-3 mb-6">
-          <div className="w-full px-3">
+          <div className="w-full">
             <label
               className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
               htmlFor="grid-password"

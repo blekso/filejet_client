@@ -4,10 +4,10 @@ import Nav from "../components/Nav";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <>
+    <div className="App">
       <Nav />
       <Component {...pageProps} />
-    </>
+    </div>
   );
 }
 

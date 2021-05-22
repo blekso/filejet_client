@@ -3,6 +3,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.App {
+  height: 100vh;
+}
+
 html,
 body {
   padding: 0;
