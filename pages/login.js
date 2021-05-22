@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
+import axios from "axios";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -7,7 +8,15 @@ export default function Login() {
   const router = useRouter();
 
   const login = () => {
-    console.log(email + " " + pass);
+    //..
+    /*const user = {
+      email: this.email,
+      password: this.password,
+    };
+
+    axios.post("http://localhost:5000/api/auth", user).then((res) => {
+      console.log(res);
+    });*/
   };
 
   return (
