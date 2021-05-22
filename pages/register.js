@@ -1,21 +1,24 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
+import axios from "axios";
 
 export default function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [pass, setPass] = useState("");
+  const [password, setPassword] = useState("");
   const router = useRouter();
 
-  const user = {
-    name: this.name,
-    email: this.email,
-    password: this.password,
-  };
+  const register = async () => {
+    const user = {
+      name: name,
+      email: email,
+      password: password,
+    };
 
-  axios.post("http://localhost:5000/api/users", user).then((res) => {
-    console.log(res);
-  });
+    await axios.post("http://localhost:5000/api/users", user).then((res) => {
+      console.log(res);
+    });
+  };
 
   return (
     <div className="w-full h-full flex justify-center items-center">
@@ -69,8 +72,8 @@ export default function Register() {
               id="grid-password"
               type="password"
               placeholder="******************"
-              onChange={(e) => setPass(e.target.value)}
-              value={pass}
+              onChange={(e) => setPassword(e.target.value)}
+              value={password}
             />
           </div>
         </div>

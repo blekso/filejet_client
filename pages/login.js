@@ -4,19 +4,18 @@ import axios from "axios";
 
 export default function Login() {
   const [email, setEmail] = useState("");
-  const [pass, setPass] = useState("");
+  const [password, setPassword] = useState("");
   const router = useRouter();
 
   const login = () => {
-    //..
-    /*const user = {
-      email: this.email,
-      password: this.password,
+    const user = {
+      email: email,
+      password: password,
     };
 
     axios.post("http://localhost:5000/api/auth", user).then((res) => {
       console.log(res);
-    });*/
+    });
   };
 
   return (
@@ -53,8 +52,8 @@ export default function Login() {
               id="grid-password"
               type="password"
               placeholder="******************"
-              onChange={(e) => setPass(e.target.value)}
-              value={pass}
+              onChange={(e) => setPassword(e.target.value)}
+              value={password}
             />
           </div>
         </div>
