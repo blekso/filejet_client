@@ -2,7 +2,8 @@ import React from "react";
 import "../styles/globals.css";
 import "tailwindcss/tailwind.css";
 import Nav from "../components/Nav";
-import { useRouter } from "next/router";
+import Login from "../components/Login";
+import UserDashboard from "../components/UserDashboard";
 
 export const AuthContext = React.createContext();
 const initialState = {
@@ -11,7 +12,6 @@ const initialState = {
   token: null,
 };
 const reducer = (state, action) => {
-  console.log(action);
   switch (action.type) {
     case "LOGIN":
       localStorage.setItem("user", JSON.stringify(action.payload.data.user));
@@ -34,7 +34,7 @@ const reducer = (state, action) => {
   }
 };
 
-function MyApp({ Component, pageProps }) {
+function MyApp() {
   const [state, dispatch] = React.useReducer(reducer, initialState);
   return (
     <AuthContext.Provider
@@ -45,7 +45,7 @@ function MyApp({ Component, pageProps }) {
     >
       <div className="App">
         <Nav />
-        <Component {...pageProps} />
+        <div>{!state.isAuthenticated ? <Login /> : <UserDashboard />}</div>
       </div>
     </AuthContext.Provider>
   );
