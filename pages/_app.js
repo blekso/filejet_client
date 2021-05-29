@@ -2,8 +2,6 @@ import React from "react";
 import "../styles/globals.css";
 import "tailwindcss/tailwind.css";
 import Nav from "../components/Nav";
-import Login from "../components/Login";
-import Home from "../components/Home";
 
 export const AuthContext = React.createContext();
 const initialState = {
@@ -36,7 +34,7 @@ const reducer = (state, action) => {
   }
 };
 
-function MyApp() {
+function MyApp({ Component, pageProps }) {
   const [state, dispatch] = React.useReducer(reducer, initialState);
   return (
     <AuthContext.Provider
@@ -47,7 +45,7 @@ function MyApp() {
     >
       <div className="App">
         <Nav />
-        <div>{!state.isAuthenticated ? <Login /> : <Home />}</div>
+        <Component {...pageProps} />
       </div>
     </AuthContext.Provider>
   );
