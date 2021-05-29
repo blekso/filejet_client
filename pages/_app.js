@@ -45,7 +45,9 @@ function MyApp() {
     >
       <div className="App">
         <Nav isAuthenticated={state.isAuthenticated} />
-        <div>{!state.isAuthenticated ? <Auth /> : <UserDashboard />}</div>
+        <div>
+          {!state.isAuthenticated ? <Auth /> : <UserDashboard state={state} />}
+        </div>
       </div>
     </AuthContext.Provider>
   );
