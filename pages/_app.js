@@ -2,6 +2,7 @@ import React from "react";
 import "../styles/globals.css";
 import "tailwindcss/tailwind.css";
 import Nav from "../components/Nav";
+import { useRouter } from "next/router";
 
 export const AuthContext = React.createContext();
 const initialState = {
@@ -10,17 +11,16 @@ const initialState = {
   token: null,
 };
 const reducer = (state, action) => {
-  console.log("action");
   console.log(action);
   switch (action.type) {
     case "LOGIN":
-      localStorage.setItem("user", JSON.stringify(action.payload.user));
-      localStorage.setItem("token", JSON.stringify(action.payload.token));
+      localStorage.setItem("user", JSON.stringify(action.payload.data.user));
+      localStorage.setItem("token", JSON.stringify(action.payload.data.token));
       return {
         ...state,
         isAuthenticated: true,
-        user: action.payload.user,
-        token: action.payload.token,
+        user: action.payload.data.user,
+        token: action.payload.data.token,
       };
     case "LOGOUT":
       localStorage.clear();

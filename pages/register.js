@@ -5,6 +5,7 @@ import { AuthContext } from "../pages/_app.js";
 export default function Register() {
   const { dispatch } = React.useContext(AuthContext);
   const initialState = {
+    name: "",
     email: "",
     password: "",
     isSubmitting: false,
@@ -28,7 +29,8 @@ export default function Register() {
     });
 
     axios
-      .post("http://localhost:5000/api/auth", {
+      .post("http://localhost:5000/api/users", {
+        name: data.name,
         email: data.email,
         password: data.password,
       })
