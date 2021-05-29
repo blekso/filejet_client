@@ -2,7 +2,7 @@ import React from "react";
 import "../styles/globals.css";
 import "tailwindcss/tailwind.css";
 import Nav from "../components/Nav";
-import Login from "../components/Login";
+import Auth from "../components/Auth";
 import UserDashboard from "../components/UserDashboard";
 
 export const AuthContext = React.createContext();
@@ -44,8 +44,8 @@ function MyApp() {
       }}
     >
       <div className="App">
-        <Nav />
-        <div>{!state.isAuthenticated ? <Login /> : <UserDashboard />}</div>
+        <Nav isAuthenticated={state.isAuthenticated} />
+        <div>{!state.isAuthenticated ? <Auth /> : <UserDashboard />}</div>
       </div>
     </AuthContext.Provider>
   );
