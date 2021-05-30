@@ -43,7 +43,7 @@ function MyApp() {
         dispatch,
       }}
     >
-      <div className="App">
+      <div id="app">
         <Nav isAuthenticated={state.isAuthenticated} />
         <div>
           {!state.isAuthenticated ? <Auth /> : <UserDashboard state={state} />}
