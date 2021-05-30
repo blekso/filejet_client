@@ -53,13 +53,13 @@ export default function Login() {
         <div className="w-full">
           <label
             className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            htmlFor="grid-email"
+            htmlFor="login-email"
           >
             Email
           </label>
           <input
             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            id="grid-email"
+            id="login-email"
             name="email"
             type="email"
             placeholder="email@email.com"
@@ -70,13 +70,13 @@ export default function Login() {
         <div className="w-full">
           <label
             className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            htmlFor="grid-password"
+            htmlFor="login-password"
           >
             Password
           </label>
           <input
             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            id="grid-password"
+            id="login-password"
             name="password"
             type="password"
             placeholder="******************"

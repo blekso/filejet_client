@@ -55,13 +55,13 @@ export default function Register() {
         <div className="w-full">
           <label
             className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            htmlFor="grid-first-name"
+            htmlFor="register-name"
           >
             Name
           </label>
           <input
             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-            id="grid-first-name"
+            id="register-name"
             name="name"
             type="text"
             placeholder="Jane"
@@ -72,13 +72,13 @@ export default function Register() {
         <div className="w-full">
           <label
             className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            htmlFor="grid-email"
+            htmlFor="register-email"
           >
             Email
           </label>
           <input
             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            id="grid-email"
+            id="register-email"
             name="email"
             type="email"
             placeholder="email@email.com"
@@ -89,13 +89,13 @@ export default function Register() {
         <div className="w-full">
           <label
             className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            htmlFor="grid-password"
+            htmlFor="register-password"
           >
             Password
           </label>
           <input
             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            id="grid-password"
+            id="register-password"
             name="password"
             type="password"
             placeholder="******************"

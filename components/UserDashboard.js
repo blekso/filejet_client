@@ -1,8 +1,9 @@
 import React from "react";
 import axios from "axios";
 import File from "./File";
+import InputFile from "./InputFile";
 
-export default function UserDashboard({ state }) {
+export default function UserDashboard() {
   const initialState = {
     files: [],
   };
@@ -26,6 +27,7 @@ export default function UserDashboard({ state }) {
       {data.files.map((file) => (
         <File key={file._id} file={file} />
       ))}
+      <InputFile />
     </div>
   );
 }

@@ -7,15 +7,22 @@ export default function Nav(props) {
   function Logout() {
     if (props.isAuthenticated) {
       return (
-        <p
-          onClick={handleLogoutClick}
-          className="p-4 hover:bg-gray-100 cursor-pointer"
-        >
-          Log Out
-        </p>
+        <div className="flex">
+          <p
+            onClick={handleLogoutClick}
+            className="p-4 hover:bg-gray-100 cursor-pointer"
+          >
+            Log Out
+          </p>
+        </div>
       );
     }
     return null;
+  }
+
+  function handleLogoutClick(e) {
+    e.preventDefault();
+    console.log("uploading..");
   }
 
   function handleLogoutClick(e) {
