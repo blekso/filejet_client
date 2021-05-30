@@ -1,16 +1,31 @@
+import React from "react";
+import axios from "axios";
+import File from "./File";
+
 export default function UserDashboard({ state }) {
-  const { stars } = getInitialProps();
+  const initialState = {
+    files: [],
+  };
+  const [data, setData] = React.useState(initialState);
 
+  React.useEffect(async () => {
+    await axios
+      .get("http://localhost:5000/api/files", { ownerId: "mihael" })
+      .then((res) => {
+        setData({
+          ...data,
+          files: res.data,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
   return (
-    <>
-      <p>{state.token}</p>
-      <div>Next stars: {stars}</div>
-    </>
+    <div className="grid md:grid-cols-6 grid-cols-2 gap-8 p-12">
+      {data.files.map((file) => (
+        <File key={file._id} file={file} />
+      ))}
+    </div>
   );
-}
-
-async function getInitialProps() {
-  const res = await fetch("https://api.github.com/repos/vercel/next.js");
-  const json = await res.json();
-  return { stars: json.stargazers_count };
 }
