@@ -10,7 +10,7 @@ export default function Nav(props) {
         <div className="flex">
           <p
             onClick={handleLogoutClick}
-            className="p-4 hover:bg-gray-100 cursor-pointer"
+            className="p-4 hover:bg-gray-100 cursor-pointer font-roboto"
           >
             Log Out
           </p>

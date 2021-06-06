@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import Modal from "react-modal";
 
 const customStyles = {
@@ -14,7 +15,7 @@ const customStyles = {
 };
 
 Modal.setAppElement("#app");
-export default function Auth({ file }) {
+export default function Auth({ file, onFileDelete }) {
   const [modalIsOpen, setIsOpen] = React.useState(false);
   function openModal() {
     setIsOpen(true);
@@ -25,14 +26,25 @@ export default function Auth({ file }) {
   }
 
   function RenderFileObject() {
-    if (file) {
-      Object.keys(file).map((obj, i) => {
-        return <div>{file[obj].name}</div>;
-      });
-    }
-    return null;
+    const keys = Object.keys(file);
+    return keys.map((key) => (
+      <p>
+        {keys[key]}:{file[`${key}`]}
+      </p>
+    ));
   }
 
+  function deleteFile() {
+    axios({
+      method: "delete",
+      url: "http://localhost:5000/api/files",
+      data: {
+        _id: file._id,
+      },
+    })
+      .then((res) => console.log(res), closeModal(), onFileDelete)
+      .catch((err) => console.error(err));
+  }
   return (
     <div>
       <div
@@ -55,12 +67,17 @@ export default function Auth({ file }) {
               X
             </p>
           </div>
-          <RenderFileObject />
+          <div class="p-2 bg-gray-100 mt-4">
+            <RenderFileObject />
+          </div>
           <div className="mt-4">
             <button className="bg-blue-600 hover:bg-blue-700 duration-300 text-white shadow p-2 rounded-r mr-4">
               Download
             </button>
-            <button className="bg-blue-600 hover:bg-blue-700 duration-300 text-white shadow p-2 rounded-r">
+            <button
+              className="bg-blue-600 hover:bg-blue-700 duration-300 text-white shadow p-2 rounded-r"
+              onClick={deleteFile}
+            >
               Delete
             </button>
           </div>

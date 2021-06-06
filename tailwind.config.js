@@ -2,12 +2,14 @@ module.exports = {
   purge: [],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        roboto: ["Roboto"],
+      },
+    },
   },
   variants: {
     extend: {},
   },
-  plugins: [
-    require('@tailwindcss/forms')
-  ],
-}
+  plugins: [require("@tailwindcss/forms")],
+};
