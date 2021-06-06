@@ -26,12 +26,7 @@ export default function Auth({ file, onFileDelete }) {
   }
 
   function RenderFileObject() {
-    const keys = Object.keys(file);
-    return keys.map((key) => (
-      <p>
-        {keys[key]}:{file[`${key}`]}
-      </p>
-    ));
+    return <pre>{JSON.stringify(file, null, 2)}</pre>;
   }
 
   function deleteFile() {
