@@ -8,7 +8,7 @@ export default function InputFile() {
       htmlFor="fileInput"
       className="flex flex-col justify-center items-center hover:bg-gray-100 p-4 cursor-pointer"
     >
-      <img src="/plus.svg" alt="file" className="w-20 h-20" />
+      <img src="/svg/plus.svg" alt="file" className="w-20 h-20" />
       <input
         className="hidden"
         id="fileInput"

@@ -51,7 +51,7 @@ export default function Auth({ file, onFileDelete }) {
         onClick={openModal}
         className="flex flex-col justify-center items-center hover:bg-gray-100 p-4 cursor-pointer"
       >
-        <img src="/file.svg" alt={file.name} className="w-20 h-20" />
+        <img src="/svg/file.svg" alt={file.name} className="w-20 h-20" />
         <p>{file.name}</p>
       </div>
       <Modal

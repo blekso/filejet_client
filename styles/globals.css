@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 /* ./styles/globals.css */
 @tailwind base;
 @tailwind components;
@@ -11,6 +13,7 @@ html,
 body {
   padding: 0;
   margin: 0;
+  font-family: 'Roboto', sans-serif;
 }
 
 a {
@@ -20,9 +23,4 @@ a {
 
 * {
   box-sizing: border-box;
-}
-
-@font-face {
-  font-family: "Roboto";
-  src: url("../public/Roboto-Regular.ttf") format("truetype")
 }
