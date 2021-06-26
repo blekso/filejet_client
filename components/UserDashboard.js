@@ -2,6 +2,8 @@ import React from "react";
 import axios from "axios";
 import File from "./File";
 import InputFile from "./InputFile";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function UserDashboard({ state }) {
   const initialState = {
@@ -10,6 +12,7 @@ export default function UserDashboard({ state }) {
   const [data, setData] = React.useState(initialState);
 
   function getData() {
+    console.log("fetching data");
     axios({
       method: "get",
       url: "http://localhost:5000/api/files",
@@ -28,8 +31,10 @@ export default function UserDashboard({ state }) {
       });
   }
 
-  function logger(e) {
-    console.log(e);
+  function refetchData() {
+    setTimeout(function () {
+      getData();
+    }, 1000);
   }
 
   React.useEffect(() => {
@@ -38,11 +43,24 @@ export default function UserDashboard({ state }) {
   }, []);
 
   return (
-    <div className="grid md:grid-cols-6 grid-cols-2 gap-8 p-12">
-      {data.files.map((file) => (
-        <File key={file._id} file={file} onFileDelete={(e) => logger(e)} />
-      ))}
-      <InputFile state={state} />
+    <div>
+      <div className="grid md:grid-cols-6 grid-cols-2 gap-8 p-12">
+        {data.files.map((file) => (
+          <File key={file._id} file={file} onFileDelete={refetchData} />
+        ))}
+        <InputFile state={state} onFileDelete={refetchData} />
+      </div>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import Modal from "react-modal";
+import { toast } from "react-toastify";
 
 const customStyles = {
   content: {
@@ -15,7 +16,7 @@ const customStyles = {
 };
 
 Modal.setAppElement("#app");
-export default function Auth({ file, onFileDelete }) {
+export default function File({ file, onFileDelete }) {
   const [modalIsOpen, setIsOpen] = React.useState(false);
   function openModal() {
     setIsOpen(true);
@@ -26,7 +27,11 @@ export default function Auth({ file, onFileDelete }) {
   }
 
   function RenderFileObject() {
-    return <pre>{JSON.stringify(file, null, 2)}</pre>;
+    // wtf objectToRender menja fajla
+    /*const objectToRender = file;
+    objectToRender.file_data = "...";
+    return <pre>{JSON.stringify(objectToRender, null, 2)}</pre>;*/
+    return <p>object</p>;
   }
 
   function deleteFile() {
@@ -37,8 +42,8 @@ export default function Auth({ file, onFileDelete }) {
         _id: file._id,
       },
     })
-      .then((res) => console.log(res), closeModal(), onFileDelete)
-      .catch((err) => console.error(err));
+      .then((res) => toast.success("Sucess"), closeModal(), onFileDelete())
+      .catch((err) => toast.error("Error"));
   }
   return (
     <div>

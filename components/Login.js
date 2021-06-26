@@ -92,7 +92,7 @@ export default function Login() {
             disabled={data.isSubmitting}
             className="bg-blue-600 hover:bg-blue-700 duration-300 text-white shadow p-2 rounded-r"
           >
-            {data.isSubmitting ? "Loading..." : "Sign up"}
+            {data.isSubmitting ? "Loading..." : "Log in"}
           </button>
         </div>
       </form>

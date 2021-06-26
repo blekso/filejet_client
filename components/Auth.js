@@ -4,7 +4,7 @@ import Register from "../components/Register";
 
 export default function Auth() {
   return (
-    <div className="grid xl:grid-cols-2 gap-8">
+    <div className="grid md:grid-cols-2 gap-8">
       <Login />
       <Register />
     </div>

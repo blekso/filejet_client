@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import Modal from "react-modal";
+import { toast } from "react-toastify";
 
 const customStyles = {
   content: {
@@ -15,7 +16,7 @@ const customStyles = {
 };
 
 Modal.setAppElement("#app");
-export default function InputFile({ state }) {
+export default function InputFile({ state, onFileDelete }) {
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const [selectedFile, setSelectedFile] = React.useState();
   const [isFilePicked, setIsFilePicked] = React.useState(false);
@@ -35,10 +36,12 @@ export default function InputFile({ state }) {
     })
       .then((response) => response.json())
       .then((result) => {
-        console.log("Success:", result);
+        toast.success("Sucess");
+        closeModal();
+        onFileDelete();
       })
       .catch((error) => {
-        console.error("Error:", error);
+        toast.error("Error");
       });
   };
 
