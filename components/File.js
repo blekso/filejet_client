@@ -62,7 +62,7 @@ export default function Auth({ file, onFileDelete }) {
               X
             </p>
           </div>
-          <div class="p-2 bg-gray-100 mt-4">
+          <div className="p-2 bg-gray-100 mt-4">
             <RenderFileObject />
           </div>
           <div className="mt-4">

@@ -28,8 +28,8 @@ export default function UserDashboard({ state }) {
       });
   }
 
-  function logger() {
-    console.log("onFileDelete");
+  function logger(e) {
+    console.log(e);
   }
 
   React.useEffect(() => {
@@ -40,9 +40,9 @@ export default function UserDashboard({ state }) {
   return (
     <div className="grid md:grid-cols-6 grid-cols-2 gap-8 p-12">
       {data.files.map((file) => (
-        <File key={file._id} file={file} onFileDelete={logger()} />
+        <File key={file._id} file={file} onFileDelete={(e) => logger(e)} />
       ))}
-      <InputFile />
+      <InputFile state={state} />
     </div>
   );
 }
