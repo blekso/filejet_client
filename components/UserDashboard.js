@@ -46,7 +46,12 @@ export default function UserDashboard({ state }) {
     <div>
       <div className="grid md:grid-cols-6 grid-cols-2 gap-8 p-12">
         {data.files.map((file) => (
-          <File key={file._id} file={file} onFileDelete={refetchData} />
+          <File
+            key={file._id}
+            state={state}
+            file={file}
+            onFileDelete={refetchData}
+          />
         ))}
         <InputFile state={state} onFileDelete={refetchData} />
       </div>

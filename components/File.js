@@ -16,7 +16,7 @@ const customStyles = {
 };
 
 Modal.setAppElement("#app");
-export default function File({ file, onFileDelete }) {
+export default function File({ file, onFileDelete, state }) {
   const [modalIsOpen, setIsOpen] = React.useState(false);
   function openModal() {
     setIsOpen(true);
@@ -27,11 +27,25 @@ export default function File({ file, onFileDelete }) {
   }
 
   function RenderFileObject() {
-    // wtf objectToRender menja fajla
-    /*const objectToRender = file;
+    const objectToRender = Object.assign({}, file);
     objectToRender.file_data = "...";
-    return <pre>{JSON.stringify(objectToRender, null, 2)}</pre>;*/
-    return <p>object</p>;
+    return <pre>{JSON.stringify(objectToRender, null, 2)}</pre>;
+  }
+
+  function downloadFile() {
+    console.log("downloading");
+    console.log(file._id);
+    console.log(state.user._id);
+    axios({
+      method: "get",
+      url: "http://localhost:5000/api/files/download",
+      data: {
+        _id: file._id,
+        ownerId: state.user._id,
+      },
+    })
+      .then((res) => toast.success("Sucess"))
+      .catch((err) => toast.error("Error"));
   }
 
   function deleteFile() {
@@ -71,7 +85,10 @@ export default function File({ file, onFileDelete }) {
             <RenderFileObject />
           </div>
           <div className="mt-4">
-            <button className="bg-blue-600 hover:bg-blue-700 duration-300 text-white shadow p-2 rounded-r mr-4">
+            <button
+              onClick={downloadFile}
+              className="bg-blue-600 hover:bg-blue-700 duration-300 text-white shadow p-2 rounded-r mr-4"
+            >
               Download
             </button>
             <button
