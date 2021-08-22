@@ -36,15 +36,16 @@ export default function File({ file, onFileDelete, state }) {
     console.log("downloading");
     console.log(file._id);
     console.log(state.user._id);
+
     axios({
-      method: "get",
+      method: "GET",
       url: "http://localhost:5000/api/files/download",
-      data: {
+      params: {
         _id: file._id,
         ownerId: state.user._id,
       },
     })
-      .then((res) => toast.success("Sucess"))
+      .then((res) => toast.success("Success"))
       .catch((err) => toast.error("Error"));
   }
 
@@ -56,7 +57,11 @@ export default function File({ file, onFileDelete, state }) {
         _id: file._id,
       },
     })
-      .then((res) => toast.success("Sucess"), closeModal(), onFileDelete())
+      .then(
+        (res) => toast.success("File deleted"),
+        closeModal(),
+        onFileDelete()
+      )
       .catch((err) => toast.error("Error"));
   }
   return (
@@ -81,7 +86,7 @@ export default function File({ file, onFileDelete, state }) {
               X
             </p>
           </div>
-          <div className="p-2 bg-gray-100 mt-4">
+          <div className="p-2 bg-gray-100 mt-4 overflow-scroll">
             <RenderFileObject />
           </div>
           <div className="mt-4">

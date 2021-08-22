@@ -44,7 +44,7 @@ export default function UserDashboard({ state }) {
 
   return (
     <div>
-      <div className="grid md:grid-cols-6 grid-cols-2 gap-8 p-12">
+      <div className="grid md:grid-cols-4 lg:grid-cols-6 grid-cols-2 gap-8 p-12">
         {data.files.map((file) => (
           <File
             key={file._id}

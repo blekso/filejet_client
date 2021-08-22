@@ -1,5 +1,5 @@
 import React from "react";
-import { AuthContext } from "../pages/_app.js";
+import { AuthContext } from "../pages/index.js";
 
 export default function Nav(props) {
   const { dispatch } = React.useContext(AuthContext);

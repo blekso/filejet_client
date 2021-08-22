@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { AuthContext } from "../pages/_app.js";
+import { AuthContext } from "../pages/index.js";
 
 export default function Register() {
   const { dispatch } = React.useContext(AuthContext);
@@ -104,7 +104,7 @@ export default function Register() {
           />
         </div>
         {data.errorMessage && (
-          <span className="form-error">{data.errorMessage}</span>
+          <span className="form-error">Please fill out all fields</span>
         )}
         <div>
           <button

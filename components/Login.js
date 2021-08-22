@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { AuthContext } from "../pages/_app.js";
+import { AuthContext } from "../pages/index.js";
 
 export default function Login() {
   const { dispatch } = React.useContext(AuthContext);
@@ -85,7 +85,7 @@ export default function Login() {
           />
         </div>
         {data.errorMessage && (
-          <span className="form-error">{data.errorMessage}</span>
+          <span className="form-error">Wrong username or password</span>
         )}
         <div>
           <button

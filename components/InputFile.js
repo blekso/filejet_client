@@ -36,7 +36,7 @@ export default function InputFile({ state, onFileDelete }) {
     })
       .then((response) => response.json())
       .then((result) => {
-        toast.success("Sucess");
+        toast.success("File uploaded");
         closeModal();
         onFileDelete();
       })
