@@ -1,6 +1,8 @@
 import React from "react";
 import axios from "axios";
 import Modal from "react-modal";
+import Router from "next/router";
+import Link from "next/link";
 import { toast } from "react-toastify";
 
 const customStyles = {
@@ -33,11 +35,15 @@ export default function File({ file, onFileDelete, state }) {
   }
 
   function downloadFile() {
-    console.log("downloading");
-    console.log(file._id);
-    console.log(state.user._id);
+    Router.push({
+      pathname: "http://localhost:5000/api/files/download",
+      query: {
+        _id: "?_id=61224c89a4108d243838b26a",
+        ownerId: "609eb51d2c72ab2a74c699df",
+      },
+    });
 
-    axios({
+    /*axios({
       method: "GET",
       url: "http://localhost:5000/api/files/download",
       params: {
@@ -46,7 +52,7 @@ export default function File({ file, onFileDelete, state }) {
       },
     })
       .then((res) => toast.success("Success"))
-      .catch((err) => toast.error("Error"));
+      .catch((err) => toast.error("Error"));*/
   }
 
   function deleteFile() {
@@ -90,12 +96,16 @@ export default function File({ file, onFileDelete, state }) {
             <RenderFileObject />
           </div>
           <div className="mt-4">
-            <button
-              onClick={downloadFile}
-              className="bg-blue-600 hover:bg-blue-700 duration-300 text-white shadow p-2 rounded-r mr-4"
+            <a
+              target="_blank"
+              href={`http://localhost:5000/api/files/download?_id=${file._id}&ownerId=${state.user._id}`}
+              rel="noopener noreferrer"
             >
-              Download
-            </button>
+              <button className="bg-blue-600 hover:bg-blue-700 duration-300 text-white shadow p-2 rounded-r mr-4">
+                Download
+              </button>
+            </a>
+
             <button
               className="bg-blue-600 hover:bg-blue-700 duration-300 text-white shadow p-2 rounded-r"
               onClick={deleteFile}
