@@ -47,7 +47,7 @@ export default function Login() {
       });
   };
   return (
-    <div className="w-full h-full p-12">
+    <div className="w-full h-full md:p-12 p-8">
       <form className="grid gap-4" onSubmit={handleFormSubmit}>
         <p>Login</p>
         <div className="w-full">

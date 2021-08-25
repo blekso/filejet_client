@@ -49,7 +49,7 @@ export default function Register() {
       });
   };
   return (
-    <div className="w-full h-full p-12">
+    <div className="w-full h-full md:p-12 p-8">
       <form className="grid gap-4" onSubmit={handleFormSubmit}>
         <p>Register</p>
         <div className="w-full">
