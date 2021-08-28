@@ -30,7 +30,7 @@ export default function InputFile({ state, onFileDelete }) {
     const formData = new FormData();
     formData.append("File", selectedFile);
     formData.append("ownerId", state.user._id);
-    fetch("//35.198.85.204:5000/api/files", {
+    fetch("http://35.198.85.204:5000/api/files", {
       method: "POST",
       body: formData,
     })
