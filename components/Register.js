@@ -29,7 +29,7 @@ export default function Register() {
     });
 
     axios
-      .post("http://localhost:5000/api/users", {
+      .post("http://35.198.85.204:5000/api/users", {
         name: data.name,
         email: data.email,
         password: data.password,
@@ -104,7 +104,7 @@ export default function Register() {
           />
         </div>
         {data.errorMessage && (
-          <span className="form-error">Please fill out all fields</span>
+          <span className="form-error">{data.errorMessage}</span>
         )}
         <div>
           <button

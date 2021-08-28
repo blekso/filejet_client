@@ -12,10 +12,9 @@ export default function UserDashboard({ state }) {
   const [data, setData] = React.useState(initialState);
 
   function getData() {
-    console.log("fetching data");
     axios({
       method: "get",
-      url: "http://localhost:5000/api/files",
+      url: "http://35.198.85.204:5000/api/files",
       params: {
         ownerId: state.user._id,
       },
