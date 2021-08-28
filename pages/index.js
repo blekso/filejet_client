@@ -1,7 +1,6 @@
 import React from "react";
 import Nav from "../components/Nav";
 import Auth from "../components/Auth";
-import Footer from "../components/Footer";
 import UserDashboard from "../components/UserDashboard";
 
 export const AuthContext = React.createContext();
@@ -47,7 +46,6 @@ function MyApp() {
         <div className="md:mb-28 mb-12">
           {!state.isAuthenticated ? <Auth /> : <UserDashboard state={state} />}
         </div>
-        <Footer />
       </div>
     </AuthContext.Provider>
   );
