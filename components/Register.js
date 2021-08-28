@@ -29,7 +29,7 @@ export default function Register() {
     });
 
     axios
-      .post("http://35.198.85.204:5000/api/users", {
+      .post("//35.198.85.204:5000/api/users", {
         name: data.name,
         email: data.email,
         password: data.password,

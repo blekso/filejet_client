@@ -28,7 +28,7 @@ export default function Login() {
     });
 
     axios
-      .post("http://35.198.85.204:5000/api/auth", {
+      .post("//35.198.85.204:5000/api/auth", {
         email: data.email,
         password: data.password,
       })

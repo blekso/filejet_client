@@ -14,7 +14,7 @@ export default function UserDashboard({ state }) {
   function getData() {
     axios({
       method: "get",
-      url: "http://35.198.85.204:5000/api/files",
+      url: "//35.198.85.204:5000/api/files",
       params: {
         ownerId: state.user._id,
       },
