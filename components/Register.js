@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { AuthContext } from "../pages/_app.js";
+import { AuthContext } from "../pages/index.js";
 
 export default function Register() {
   const { dispatch } = React.useContext(AuthContext);
@@ -29,7 +29,7 @@ export default function Register() {
     });
 
     axios
-      .post("http://localhost:5000/api/users", {
+      .post("http://35.198.85.204:5000/api/users", {
         name: data.name,
         email: data.email,
         password: data.password,
@@ -49,7 +49,7 @@ export default function Register() {
       });
   };
   return (
-    <div className="w-full h-full p-12">
+    <div className="w-full h-full md:p-12 p-8">
       <form className="grid gap-4" onSubmit={handleFormSubmit}>
         <p>Register</p>
         <div className="w-full">

@@ -1,6 +1,8 @@
 import React from "react";
 import axios from "axios";
 import Modal from "react-modal";
+import Router from "next/router";
+import Link from "next/link";
 import { toast } from "react-toastify";
 
 const customStyles = {
@@ -32,31 +34,19 @@ export default function File({ file, onFileDelete, state }) {
     return <pre>{JSON.stringify(objectToRender, null, 2)}</pre>;
   }
 
-  function downloadFile() {
-    console.log("downloading");
-    console.log(file._id);
-    console.log(state.user._id);
-    axios({
-      method: "get",
-      url: "http://localhost:5000/api/files/download",
-      data: {
-        _id: file._id,
-        ownerId: state.user._id,
-      },
-    })
-      .then((res) => toast.success("Sucess"))
-      .catch((err) => toast.error("Error"));
-  }
-
   function deleteFile() {
     axios({
       method: "delete",
-      url: "http://localhost:5000/api/files",
+      url: "http://35.198.85.204:5000/api/files",
       data: {
         _id: file._id,
       },
     })
-      .then((res) => toast.success("Sucess"), closeModal(), onFileDelete())
+      .then(
+        (res) => toast.success("File deleted"),
+        closeModal(),
+        onFileDelete()
+      )
       .catch((err) => toast.error("Error"));
   }
   return (
@@ -81,16 +71,20 @@ export default function File({ file, onFileDelete, state }) {
               X
             </p>
           </div>
-          <div className="p-2 bg-gray-100 mt-4">
+          <div className="p-2 bg-gray-100 mt-4 overflow-scroll">
             <RenderFileObject />
           </div>
           <div className="mt-4">
-            <button
-              onClick={downloadFile}
-              className="bg-blue-600 hover:bg-blue-700 duration-300 text-white shadow p-2 rounded-r mr-4"
+            <a
+              target="_blank"
+              href={`http://35.198.85.204:5000/api/files/download?_id=${file._id}&ownerId=${state.user._id}`}
+              rel="noopener noreferrer"
             >
-              Download
-            </button>
+              <button className="bg-blue-600 hover:bg-blue-700 duration-300 text-white shadow p-2 rounded-r mr-4">
+                Download
+              </button>
+            </a>
+
             <button
               className="bg-blue-600 hover:bg-blue-700 duration-300 text-white shadow p-2 rounded-r"
               onClick={deleteFile}

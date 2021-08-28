@@ -30,13 +30,13 @@ export default function InputFile({ state, onFileDelete }) {
     const formData = new FormData();
     formData.append("File", selectedFile);
     formData.append("ownerId", state.user._id);
-    fetch("http://localhost:5000/api/files", {
+    fetch("http://35.198.85.204:5000/api/files", {
       method: "POST",
       body: formData,
     })
       .then((response) => response.json())
       .then((result) => {
-        toast.success("Sucess");
+        toast.success("File uploaded");
         closeModal();
         onFileDelete();
       })

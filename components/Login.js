@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { AuthContext } from "../pages/_app.js";
+import { AuthContext } from "../pages/index.js";
 
 export default function Login() {
   const { dispatch } = React.useContext(AuthContext);
@@ -28,7 +28,7 @@ export default function Login() {
     });
 
     axios
-      .post("http://localhost:5000/api/auth", {
+      .post("http://35.198.85.204:5000/api/auth", {
         email: data.email,
         password: data.password,
       })
@@ -47,7 +47,7 @@ export default function Login() {
       });
   };
   return (
-    <div className="w-full h-full p-12">
+    <div className="w-full h-full md:p-12 p-8">
       <form className="grid gap-4" onSubmit={handleFormSubmit}>
         <p>Login</p>
         <div className="w-full">
@@ -85,7 +85,7 @@ export default function Login() {
           />
         </div>
         {data.errorMessage && (
-          <span className="form-error">{data.errorMessage}</span>
+          <span className="form-error">Wrong username or password</span>
         )}
         <div>
           <button
