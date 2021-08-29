@@ -37,7 +37,7 @@ export default function File({ file, onFileDelete, state }) {
   function deleteFile() {
     axios({
       method: "delete",
-      url: "http://localhost:5000/api/files",
+      url: "http://35.198.85.204:5000/api/files",
       data: {
         _id: file._id,
       },
@@ -77,7 +77,7 @@ export default function File({ file, onFileDelete, state }) {
           <div className="mt-4">
             <a
               target="_blank"
-              href={`http://localhost:5000/api/files/download?_id=${file._id}&ownerId=${state.user._id}`}
+              href={`http://35.198.85.204:5000/api/files/download?_id=${file._id}&ownerId=${state.user._id}`}
               rel="noopener noreferrer"
             >
               <button className="bg-blue-600 hover:bg-blue-700 duration-300 text-white shadow p-2 rounded-r mr-4">
